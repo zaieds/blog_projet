@@ -24,7 +24,7 @@
     <br>
     <div class="col-sm-offset-3 col-sm-6 confirm-container">
         <div class="panel panel-info">
-            <div class="panel-heading">Contactez-moi</div>
+            <div class="panel-heading">Succès</div>
             <div class="panel-body">
                 Merci <span class="user_name" style="font-weight: 600;">{{$nom}}</span>. Votre message a été transmis. Vous recevrez une réponse rapidement.
             </div>

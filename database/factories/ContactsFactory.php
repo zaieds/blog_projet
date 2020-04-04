@@ -17,10 +17,11 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Contacts::class, function (Faker $faker) {
+$factory->define(App\Contact::class, function (Faker $faker) {
     return [
-        'number' => $faker->number,
-        'email' => $faker->unique()->safeEmail,
-
+        'contact_name' => $faker->name(),
+        'contact_email' => $faker->unique()->safeEmail,
+        'contact_message'=> $faker->paragraph(),
+        //'contact_date' => $faker->dateTime($max = 'now', $timezone = null),
     ];
 });

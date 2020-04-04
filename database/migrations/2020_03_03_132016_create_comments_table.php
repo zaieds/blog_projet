@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->string('comment_name',255 );
             $table->string('comment_email',255);
             $table->text('comment_content');
-            $table->timestamp('comment_date');
+            //$table->timestamp('comment_date');
             $table->timestamps();
         });
     }

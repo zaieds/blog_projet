@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contact;
 
 class ContactController extends Controller
 {
@@ -21,6 +22,14 @@ class ContactController extends Controller
             'email' => 'required|email',
             'texte' => 'required'
         ]);
+        
+        Contact::create([
+                'contact_name'=>request('nom'),
+                'contact_email' => request('email'),
+                'contact_message' => request('texte'),
+                'contact_date' => now()
+        ]);
+    
         return view('confirm', $sucess);
 
     }
