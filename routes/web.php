@@ -26,6 +26,14 @@ Route::post('user', 'UserController@postInfos');
 Route::get('article', 'ArticlesController@index');
 
 Route::get('/article/{post_name}', 'PostsController@show');
+
+Route::resource('admin/article/{post_name}', 'AdminController@show');
+Route::get('admin', 'AdminController@index');
+/*Route::resource('user', 'AdminController')->parameters([
+    'user' => 'admin_user'
+]);*/
+
+
 //Route::get('article/{n}', 'ArticleController@show' )->where('n', '[0-9]+');
 
 /*
