@@ -27,6 +27,7 @@ Route::get('article', 'ArticlesController@index');
 
 Route::get('/article/{post_name}', 'PostsController@show');
 
+
 Route::resource('admin/article/{post_name}', 'AdminController@show');
 Route::get('admin', 'AdminController@index');
 /*Route::resource('user', 'AdminController')->parameters([
@@ -35,6 +36,7 @@ Route::get('admin', 'AdminController@index');
 
 
 //Route::get('article/{n}', 'ArticleController@show' )->where('n', '[0-9]+');
+Route::post('/article/{post}/comments','CommentsController@store');
 
 /*
 //créer une page contact.blade.php dans source/views

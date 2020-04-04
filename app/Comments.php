@@ -10,6 +10,9 @@ class Comments extends Model
     protected $table ='comments';
     public $timestamps = false;
 
+    protected $fillable = [
+        'post_id','comment_name', 'comment_email', 'comment_content','comment_date'
+    ];
     /**
      * Get the user that authored the post.
      */
@@ -17,6 +20,9 @@ class Comments extends Model
     {
         return $this->belongsTo('App\Post','post_id');
     }
+
+   
+
 
 
 
