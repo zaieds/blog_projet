@@ -21,10 +21,13 @@ $factory->define(App\Post::class, function (Faker $faker) {
     $users = App\User::pluck('id')->toArray();
     return [
         'user_id' => $faker->randomElement($users),
-        'post_date' => now(),
+        'post_date' => $faker->dateTime($max = 'now', $timezone = null),
         'post_content' => $faker->paragraph(),
         'post_title' => $faker->sentence(),
         'post_name' => $faker->word(),
+        'post_status'=> $faker->word(),
+        'post_category'=>$faker->word(),
+        //'post_type'=> $faker->randomElement(['article', 'media']),
         'post_type' => 'article',
     ];
 });

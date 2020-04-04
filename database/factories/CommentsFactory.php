@@ -21,9 +21,9 @@ $factory->define(App\Comments::class, function (Faker $faker) {
     $posts = App\Post::pluck('id')->toArray();
     return [
         'post_id' => $faker->randomElement($posts),
-        'comment_name' => $faker->word(),
+        'comment_name' => $faker->name(),
         'comment_email' => $faker->unique()->safeEmail,
         'comment_content' => $faker->paragraph(),
-        'comment_date' => now(),
+        //'comment_date' => $faker->dateTime($max = 'now', $timezone = null)
     ];
 });

@@ -2,6 +2,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Contact;
 
 
 class ContactsTableSeeder extends Seeder
@@ -13,9 +14,6 @@ class ContactsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('posts')->insert([
-            'number' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-        ]);
+        factory(App\Contact::class, 20)->create();
     }
 }
