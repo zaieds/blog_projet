@@ -16,9 +16,10 @@
         <ul class="menu">
             <li class="menu-text">Blog</li>
             <li><a href="/">Home</a></li>
-            <li><a href="article">Articles</a></li>
-            <li><a href="contact">Contacts</a></li>
-            <li><a href="user">Utilisateurs</a></li>
+            <li><a href="/article">Articles</a></li>
+            <li><a href="/contact">Contacts</a></li>
+            <li><a href="/admin">Administrateur</a></li>
+            <li><a href="/user">Utilisateurs</a></li>
         </ul>
     </div>
 </div>
