@@ -13,26 +13,31 @@
 
         <div class="panel-heading">Laissez un commentaire</div>
 
-        <form action="{{"article/".$post->post_name}}" method="POST">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <input type="text" class="form-control {{ $errors->has('nom') ? 'is-invalid' : '' }}" name="nom" id="nom" placeholder="Votre nom" value="{{ old('nom') }}">
-                {!! $errors->first('nom', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" placeholder="Votre email" value="{{ old('email') }}">
-                {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <div class="form-group">
-                <textarea class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" name="message" id="message" placeholder="Votre message">{{ old('message') }}</textarea>
-                {!! $errors->first('message', '<div class="invalid-feedback">:message</div>') !!}
-            </div>
-            <button type="submit" class="btn btn-secondary"> Envoyer!</button>
-        </form>
+        <div class="panel-body">
 
-        <div>
-            {{ $post->hasComments->comment_content }}
+               {!! Form::open(['url' => "article/$post->id/comments"]) !!}
+
+               <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
+                    {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
+                    {!! $errors->first('nom', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
+                    {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Votre email']) !!}
+                    {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
+                    {!! Form::textarea ('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre commentaire']) !!}
+                    {!! $errors->first('texte', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
+                {!! Form::close() !!}
         </div>
+
+        
+        @foreach ($post->hasComments as $comment)
+          <p> <b> {{ $comment->comment_name }} </b> <i>{{ $comment->comment_date }}</i> </P>
+          <div> {{ $comment->comment_content }}</div>
+        @endforeach
 
     </div>
 @endsection
