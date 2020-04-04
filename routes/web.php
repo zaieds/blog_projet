@@ -26,7 +26,7 @@ Route::post('user', 'UserController@postInfos');
 Route::get('article', 'ArticlesController@index');
 
 Route::get('/article/{post_name}', 'PostsController@show');
-//Route::get('article/{n}', 'ArticleController@show' )->where('n', '[0-9]+');
+Route::post('/article/{post}/comments','CommentsController@store');
 
 /*
 //créer une page contact.blade.php dans source/views
