@@ -17,10 +17,13 @@ class CreateContactsTable extends Migration
             $table->bigIncrements('id');
             $table->string('contact_name');
             $table->string('contact_email',100)->unique();
+            $table->string('contact_email',100);
             $table->text('contact_message');
             $table->timestamp('contact_date');
+            //$table->timestamp('contact_date');
             $table->timestamps();
         });
+    
     }
 
     /**
