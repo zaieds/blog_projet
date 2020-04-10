@@ -10,11 +10,15 @@ class PostsController extends Controller
 {
     function index(){
 
-        return view('article');
+        //Show all articles from the database and return to view
+        $posts = \App\Post::all();
+        return view('article',array(
+            'posts' => $posts
+        ));
     }
 
     public function show($post_name) {
-        $post = \App\Post::where('post_name',$post_name)->first(); //get first post with post_nam == $post_name
+        $post = \App\Post::where('post_name',$post_name)->first(); //get first post with post_name == $post_name
         return view('post_single',array( //Pass the post to the view
             'post' => $post
         ));

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class Post extends Migration
 {
     /**
      * Run the migrations.
@@ -33,7 +33,6 @@ class CreatePostsTable extends Migration
      * @return void
      */
     public function down()
-//on mettra le code de suppression
     {
         Schema::dropIfExists('posts');
     }
