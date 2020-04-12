@@ -134,7 +134,7 @@
         var tds = null;
         var post_status = null;
         var _token = document.querySelector(".articleEdit input[name=_token]");
-        var post_id = document.querySelector("td.post_id");
+        var post_id = null;
         var nomArt = null;
         var nomAut = null;
         var contenus = null;
@@ -152,6 +152,7 @@
                 post_category = document.querySelector(".articleEdit input[name=post_category]");
                 post_status = document.querySelector(".articleEdit input[name=post_status]");
 
+                post_id = getText("post_id", tds);
                 nomArt.value = getText("post_title", tds);
                 nomAut.value = getText("post_name", tds);
                 contenus.value = getText("post_content", tds);
@@ -164,7 +165,7 @@
         var editSubmitPostJs = document.querySelector("#editSubmitPostJs");
         editSubmitPostJs.addEventListener('click', (e)=>{
             e.preventDefault();
-            var urlPut = "{{route('update_article', ['article'=>"--"])}}".replace("--", post_id.textContent);
+            var urlPut = "{{route('update_article', ['article'=>"--"])}}".replace("--", post_id);
             const formData = {
                 'post_title': nomArt.value,
                 'post_name': nomAut.value,

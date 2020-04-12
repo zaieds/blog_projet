@@ -87,10 +87,8 @@ class AdminArticleController extends Controller
      */
     public function edit($article)
     {
-
         $post = Post::find(['id'=> $article])->first();
         return view('admin.admin_article_edit',['post'=> $post]);
-
     }
 
     /**
@@ -104,7 +102,6 @@ class AdminArticleController extends Controller
     {
         $data = $request->all();
         $post = Post::find(['id'=> $article])->first();
-
         if( !$post->post_date)
         {
             // Si l'utilisateur coche 'publier l'article' et la publication n'a pas deja été faite
