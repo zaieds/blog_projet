@@ -11,21 +11,41 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome', ['posts'=> App\Post::all()]);
+//});
+//Route::get('/contact', 'ContactController@index')->name("contact");
 
-Route::get('contact', 'ContactController@create');
-Route::post('contact', 'ContactController@store');
+/*
+ * route vers la créaction de contact
+ */
+Route::get('/contact/create', 'ContactController@create')->name("contact");;
 
-Route::get('/', 'HomeController@index');
-Route::get('user', 'UserController@getInfos');
-Route::post('user', 'UserController@postInfos');
+/*
+ * route vers la confirmation de création de contact
+ */
+Route::post('/contact', 'ContactController@store');
 
-//Route::get('contact', 'ContactController@index');
-Route::get('article', 'PostsController@index');
+/*
+ * route vers la page d'acceuil
+ */
+Route::get('/', 'HomeController@index')->name("home");
 
-Route::get('/articles/{post_name}', 'PostsController@show')->name("article_show");
+/*
+ * route vers la création de l'utilisateur
+ */
+Route::get('users', 'UserController@getInfos')->name("users");
+Route::post('users', 'UserController@postInfos')->name("users_store");
+
+/*
+ * route vers l'affichage du liste des articles
+ */
+Route::get('articles', 'PostsController@index')->name("articles");
+
+/*
+ * route vers
+ */
+Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 
 
 /*
@@ -42,18 +62,12 @@ Route::resource('/admin/articles', 'AdminArticleController', [
             'index' => 'index_article',
             'store' => 'store_article', // insert into db
             'update' => 'update_article',
+            'edit' => 'edit_article',
             'destroy' => 'destroy_article',
         ]
     ])->only([
-    'index', 'create', 'store', 'update', 'destroy'
+    'index', 'create', 'store', 'update', 'destroy' , 'edit'
 ]);
 
-Route::post('/article/{post}/comments','CommentsController@store');
+Route::post('/article/{post}/comments','CommentsController@store')->name("comments_store");
 
-
-/*Route::get('/admin/{post_name}', 'AdminController@index')->name('admin');
-Route::get('/admin/{id}/edit','AdminController@edit')->name('admin_edit');
-Route::get('/admin/{id}/delete','AdminController@destroy')->name('admin_destroy');
-Route::get('/admin/create','AdminController@create')->name('admin_create');
-Route::post('/admin/create','AdminController@store')->name('admin_store');
-Route::post('/admin/update','AdminController@update')->name('admin_update');*/

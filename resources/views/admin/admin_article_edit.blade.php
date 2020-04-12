@@ -1,6 +1,4 @@
 @extends('layouts.main')
-@extends('post_single')
-@extends('article')
 @section('title','Edit article')
 @section('content')
     <!-- Font Awesome -->
