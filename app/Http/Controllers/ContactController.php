@@ -20,14 +20,14 @@ class ContactController extends Controller
         $sucess = $request->validate([
             'nom' => 'required',
             'email' => 'required|email',
-            'texte' => 'required'
+            'text' => 'required'
         ]);
         
         Contact::create([
                 'contact_name'=>request('nom'),
                 'contact_email' => request('email'),
-                'contact_message' => request('texte'),
-                'contact_date' => now()
+                'contact_message' => request('text'),
+                //'contact_date' => now()
         ]);
     
         return view('confirm', $sucess);

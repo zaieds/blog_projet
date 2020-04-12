@@ -1,6 +1,4 @@
 @extends('layouts.main')
-@extends('post_single')
-@extends('article')
 @section('title','admin Index')
 @section('content')
     <!-- Font Awesome -->
@@ -34,22 +32,23 @@
 
                 <tr>
                     <th>#</th>
-                    <th>Nom de l'article</th>
+                    <th>titre de l'article</th>
                     <th>Nom de l'auteur</th>
-                    <th>Contenue de l'article</th>
-                    <th>Catégorie</th>
+                    <th>Contenus de l'article</th>
+                    <th>Catégorie de l'article</th>
                     <th>id utilisateur</th>
-
+                    <th>Article Publié</th>
                 </tr>
                @foreach($posts as $post)
                     <tr class = "text-center">
-                        <td>{{ $post->id }}</td>
-                        <td>{{ $post->post_title }}</td>
-                        <td>{{ $post->post_name }}</td>
-                        <td>{{ $post->post_content }}</td>
-                        <td>{{ $post->post_category }}</td>
-                        <td>{{ $post->user_id }}</td>
-                        <td><a class = "btn btn-info">Changer</a></td>
+                        <td class="post_id">{{ $post->id }}</td>
+                        <td class="post_title">{{ $post->post_title }}</td>
+                        <td class="post_name">{{ $post->post_name }}</td>
+                        <td class="post_content">{{ $post->post_content }}</td>
+                        <td class="post_category">{{ $post->post_category }}</td>
+                        <td class="post_userId">{{ $post->user_id }}</td>
+                        <td class="post_status">{{ $post->post_status=="1"?"True":"False" }}</td>
+                        <td><a class = "btn btn-info editPostJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{$post->id}}">Editer</a></td>
                         <td><a  class = "btn btn-danger">Supprimer</a></td>
 
 {{-- <td><a href="{{route('admin_edit',['id'=>$post->id])}}" class = "btn btn-info">Changer</a></td>
@@ -68,7 +67,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
+                       </div>
                         <div class="modal-body">
                             <div class="panel-body">
 
@@ -110,11 +109,89 @@
 
                         </div>
 
+
                     </div>
                 </div>
             </div>
+            @include("admin.admin_article_edit")
         </div>
     </div>
     </div>
 
 @stop
+
+@push("scripts")
+    <script>
+
+        function getText(key, data)
+        {
+            var text = "";
+            data.forEach( td =>{
+                if(td.classList.contains(key)) text = td.textContent;
+            })
+            return text;
+        }
+        var tds = null;
+        var post_status = null;
+        var _token = document.querySelector(".articleEdit input[name=_token]");
+        var post_id = document.querySelector("td.post_id");
+        var nomArt = null;
+        var nomAut = null;
+        var contenus = null;
+        var user_id = null;
+        var post_category = null;
+
+        $editButtons = document.querySelectorAll(".editPostJs");
+        $editButtons.forEach( editBtn => {
+            editBtn.addEventListener("click", (e) =>{
+                tds = editBtn.parentNode.parentElement.querySelectorAll("td:not(:last-child)");
+                nomArt = document.querySelector(".articleEdit input[name=nomArt]");
+                nomAut = document.querySelector(".articleEdit input[name=nomAut]");
+                contenus = document.querySelector(".articleEdit textarea[name=contenus]");
+                user_id = document.querySelector(".articleEdit input[name=user_id]");
+                post_category = document.querySelector(".articleEdit input[name=post_category]");
+                post_status = document.querySelector(".articleEdit input[name=post_status]");
+
+                nomArt.value = getText("post_title", tds);
+                nomAut.value = getText("post_name", tds);
+                contenus.value = getText("post_content", tds);
+                user_id.value = getText("post_userId", tds);
+                post_category.value = getText("post_category", tds);
+                post_status.checked = getText("post_status", tds)=="True";
+            });
+        });
+
+        var editSubmitPostJs = document.querySelector("#editSubmitPostJs");
+        editSubmitPostJs.addEventListener('click', (e)=>{
+            e.preventDefault();
+            var urlPut = "{{route('update_article', ['article'=>"--"])}}".replace("--", post_id.textContent);
+            const formData = {
+                'post_title': nomArt.value,
+                'post_name': nomAut.value,
+                'post_content': contenus.value,
+                'post_userId': user_id.value,
+                'post_category': post_category.value,
+                'post_status': post_status.checked
+            }
+            console
+                .log(formData)
+            return fetch(urlPut, {
+                method: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': _token.value,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            }).then(response => {
+                window.location = "{{route('index_article')}}";
+                console.log(response.json());
+
+            }, (error)=>
+            {
+                console.log(error)
+            }).then(()=>console.log("************ DONE *************"));
+
+        })
+
+    </script>
+@endpush
