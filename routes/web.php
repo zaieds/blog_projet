@@ -57,6 +57,10 @@ Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 //Route::get('admin', 'AdminController');
 Route::get('/admin', 'AdminController@index')->name("admin");
 
+/*Route::group(['middleware' => 'auth'], function () {
+    Route::get('upload', ['as' => 'upload', 'uses' => 'MediaController@index']);
+});*/
+
 Route::resource('/admin/articles', 'AdminArticleController', [
         'names' => [
             'index' => 'index_article',

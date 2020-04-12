@@ -142,9 +142,6 @@ class AdminArticleController extends Controller
         $post->delete();
         return redirect()->route('admin.admin');
 
-
-
-
         /*
          * $post = Post::findOrFail($id);
         $post->delete();

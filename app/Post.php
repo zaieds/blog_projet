@@ -21,7 +21,7 @@ class Post extends Model
     }
 
     /**
-     * Get the user that authored the post.
+     * Get the owner of the post.
      */
     public function author()
     {
