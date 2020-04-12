@@ -135,17 +135,23 @@ class AdminArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($article)
     {
 
-        $post = Post::find($id);
-        $post->delete();
-        return redirect()->route('admin.admin');
+//        $post = Post::find(['id'=> $article])->first();
+//        $post->delete();
+//        return redirect()->route('admin.admin_destroy');
 
-        /*
-         * $post = Post::findOrFail($id);
+
+//         $post = Post::findOrFail($article);
+//        $post->delete();
+//        return back();
+
+
+        $post = Post::find($article);
         $post->delete();
-        return back();
-         */
+
+        return redirect('/admin/articles')->with('success', 'Article supprimé !');
+
     }
 }

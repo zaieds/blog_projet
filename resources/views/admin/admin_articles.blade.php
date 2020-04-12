@@ -49,7 +49,14 @@
                         <td class="post_userId">{{ $post->user_id }}</td>
                         <td class="post_status">{{ $post->post_status=="1"?"True":"False" }}</td>
                         <td><a class = "btn btn-info editPostJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{$post->id}}">Editer</a></td>
-                        <td><a  class = "btn btn-danger">Supprimer</a></td>
+                        <td>
+                            <form action="{{ route('destroy_article', $post->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit"> Supprimer
+                                </button>
+                           </form>
+                        </td>
 
 {{-- <td><a href="{{route('admin_edit',['id'=>$post->id])}}" class = "btn btn-info">Changer</a></td>
  <td><a href="{{route('admin_destroy',['id'=>$post->id])}}" class = "btn btn-danger">Supprimer</a></td>
