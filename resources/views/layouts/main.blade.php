@@ -18,11 +18,11 @@
     <div class="top-bar-left">
         <ul class="menu">
             <li class="menu-text">Blog</li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/article">Articles</a></li>
-            <li><a href="/contact">Contacts</a></li>
-            <li><a href="/admin">Administrateur</a></li>
-            <li><a href="/user">Utilisateurs</a></li>
+            <li><a href="{{route("home")}}">Home</a></li>
+            <li><a href="{{route("articles")}}">Articles</a></li>
+            <li><a href="{{route("contact")}}">Contacts</a></li>
+            <li><a href="{{route("admin")}}">Administrateur</a></li>
+            <li><a href="{{route("users")}}">Utilisateurs</a></li>
         </ul>
     </div>
 </div>
@@ -45,6 +45,7 @@
 <script>
     $(document).foundation();
 </script>
+    @stack("scripts")
 </body>
 </html>
 

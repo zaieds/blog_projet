@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 $factory->define(App\Contact::class, function (Faker $faker) {
     return [
         'contact_name' => $faker->name(),
-        'contact_email' => $faker->unique()->safeEmail,
+        'contact_email' => $faker->email,
         'contact_message'=> $faker->paragraph(),
         //'contact_date' => $faker->dateTime($max = 'now', $timezone = null),
     ];

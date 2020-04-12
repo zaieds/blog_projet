@@ -17,12 +17,10 @@ class PostsController extends Controller
         ));
     }
 
-    public function show($post_name) {
-        $post = \App\Post::where('post_name',$post_name)->first(); //get first post with post_name == $post_name
+    public function show($post_id) {
+        $post = \App\Post::where('id',$post_id)->first(); //get first post with id == $post_id
         return view('post_single',array( //Pass the post to the view
             'post' => $post
         ));
     }
-
-
 }

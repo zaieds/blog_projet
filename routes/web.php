@@ -16,7 +16,7 @@
 //});
 //Route::get('/contact', 'ContactController@index')->name("contact");
 
-/*
+/*article_show
  * route vers la créaction de contact
  */
 Route::get('/contact/create', 'ContactController@create')->name("contact");;
@@ -43,7 +43,7 @@ Route::post('users', 'UserController@postInfos')->name("users_store");
 Route::get('articles', 'PostsController@index')->name("articles");
 
 /*
- * route vers
+ * route vers les articles
  */
 Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 
@@ -56,6 +56,10 @@ Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 ]);*/
 //Route::get('admin', 'AdminController');
 Route::get('/admin', 'AdminController@index')->name("admin");
+
+/*Route::group(['middleware' => 'auth'], function () {
+    Route::get('upload', ['as' => 'upload', 'uses' => 'MediaController@index']);
+});*/
 
 Route::resource('/admin/articles', 'AdminArticleController', [
         'names' => [

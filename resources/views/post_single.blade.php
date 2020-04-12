@@ -5,7 +5,7 @@
             <h1>{{ $post->post_title }}</h1>
         </div>
 
-        <p> Auteurs : {{ $post->author->name }}</p>
+        <p> Auteurs : {{ $post->post_name }}</p>
 
         <div>
             {{ $post->post_content }}

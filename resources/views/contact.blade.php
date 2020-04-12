@@ -77,9 +77,9 @@
                     {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Votre email']) !!}
                     {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
-                    {!! Form::textarea ('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre message']) !!}
-                    {!! $errors->first('texte', '<div class="invalid-feedback">:message</div>') !!}
+                <div class="form-group {!! $errors->has('text') ? 'has-error' : '' !!}">
+                    {!! Form::textarea ('text', null, ['class' => 'form-control', 'placeholder' => 'Votre message']) !!}
+                    {!! $errors->first('text', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
                 {!! Form::close() !!}
