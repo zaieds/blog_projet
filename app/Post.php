@@ -9,6 +9,16 @@ class Post extends Model
 
     protected $table ='posts';
     //public $timestamps = false;
+    protected $fillable = [
+        'user_id', 'post_date', 'post_content', 'post_title', 'post_status', 'post_name', 'post_type','post_category'
+    ];
+
+    public static function create($data)
+    {
+        dd($data);
+
+        return parent::create($data);
+    }
 
     /**
      * Get the user that authored the post.

@@ -23,5 +23,6 @@ class UsersTableSeeder extends Seeder
             $post->hasComments()->save(factory(App\Comments::class)->create());
         });
 
+
     }
 }
