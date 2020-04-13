@@ -10,6 +10,8 @@
             padding: 1em;
             background-color: #e1faea;
             box-shadow: 0px 0px 5px rgba(0,0,0,.2);
+            margin:auto;
+            width: 50%;
         }
         .panel-heading
         {

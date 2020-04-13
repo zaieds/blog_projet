@@ -9,7 +9,6 @@
             <div class="panel-heading">Contactez-nous</div>
 
             <div class="panel-body">
-                <form>
                {!! Form::open(['url' => 'contact']) !!}
 
                 <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
@@ -26,7 +25,6 @@
                 </div>
                 {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
                 {!! Form::close() !!}
-                </form>
             </div>
         </div>
 </div>
