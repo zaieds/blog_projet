@@ -13,7 +13,8 @@
         </div>
     </div>
     
-        <div class="panel-heading">Laissez un commentaire</div>
+    <hr>
+        <div class="panel-heading"><b>Laissez un commentaire</b></div>
 
         <div class="panel-body">
 
@@ -35,10 +36,12 @@
                 {!! Form::close() !!}
         </div>
     
-        
+
+        <div>
         @foreach ($post->hasComments as $comment)
-          <p> <b> {{ $comment->comment_name }} </b> <i>{{ $comment->comment_date }}</i> </P>
+          <p> <b> {{ $comment->comment_name }} </b> <i>{{ $comment->create_at }}</i> </P>
           <div> {{ $comment->comment_content }}</div>
         @endforeach
+        </div>
 </div>
 @endsection
