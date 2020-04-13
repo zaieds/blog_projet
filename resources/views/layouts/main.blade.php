@@ -6,9 +6,31 @@
     <title>@yield('titre')</title>
     <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>-->
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
+
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
+    <style>
+        .container {
+            margin: auto;
+            width: 50%;
+        }     
+    </style>
+    
     @yield('custom-styles')
 </head>
 <body>
@@ -37,50 +59,48 @@
 
     <div class ="top-bar-right">
     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
-
-                            @if (Route::has('register'))
-                              
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('S\'inscrire') }}</a>
-                           
-                            @endif
-                        @else
-                            
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+        <!-- Authentication Links -->
+        @guest
+            <div style= "display:inline">
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Se connecter') }}</a>
+            @if (Route::has('register'))              
+                <a class="nav-link" href="{{ route('register') }}">{{ __('S\'inscrire') }}</a>
+            @endif
+            </div>
+        @else
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+            </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Se déconnecter') }}
-                                    </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Se déconnecter') }}
+                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
                            
-                        @endguest
-                    </ul>
+        @endguest
+    </ul>
     </div>
 </div>
 <!-- End Top Bar -->
 
 <div class="callout large primary">
-    <div class="row column text-center">
-        <h1>MIASHS Blog</h1>
+    <div class="text-center">
+        <h1 class=>MIASHS Blog</h1>
         <h2 class="subheader"></h2>
     </div>
 </div>
 
 <!-- We can now combine rows and columns when there's only one column in that row -->
-<div class="row medium-8 large-7 columns">
-    @yield('content')
-</div>
+
+    @yield('content') 
+
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>

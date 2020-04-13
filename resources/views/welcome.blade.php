@@ -1,6 +1,6 @@
-@extends('layouts/main')
+@extends('layouts.main')
 @section('content')
-    <div>
+    <div class="container">
         <ul>
             @foreach ( $posts as $post )
 

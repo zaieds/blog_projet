@@ -1,5 +1,6 @@
 @extends('layouts/main')
 @section('content')
+<div class="container">
     <div class="content">
         <div class="title m-b-md">
             <h1>{{ $post->post_title }}</h1>
@@ -11,7 +12,7 @@
             {{ $post->post_content }}
         </div>
     </div>
-
+    
         <div class="panel-heading">Laissez un commentaire</div>
 
         <div class="panel-body">
@@ -33,11 +34,11 @@
                 {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
                 {!! Form::close() !!}
         </div>
-
+    
         
         @foreach ($post->hasComments as $comment)
           <p> <b> {{ $comment->comment_name }} </b> <i>{{ $comment->comment_date }}</i> </P>
           <div> {{ $comment->comment_content }}</div>
         @endforeach
-
+</div>
 @endsection
