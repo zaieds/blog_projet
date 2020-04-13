@@ -32,13 +32,15 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        factory(App\User::class, 10)->create()->each(function ($user) {
+        factory(App\User::class, 20)->create()->each(function ($user) {
             $user->posts()->save(factory(App\Post::class)->make());
         });
 
-        factory(App\Post::class, 10)->create()->each(function ($post) {//générer les comments
+        
+
+        /*factory(App\Post::class, 10)->create()->each(function ($post) {//générer les comments
             $post->hasComments()->save(factory(App\Comments::class)->create());
-        });
+        });*/
 
 
     }
