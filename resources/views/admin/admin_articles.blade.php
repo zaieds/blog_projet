@@ -90,7 +90,7 @@
                                         {!! $errors->first('nomAut', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group {!! $errors->has('contenus') ? 'has-error' : '' !!}">
-                                        {!! Form::textarea ('contenus', null, ['class' => 'form-control', 'placeholder' => 'Contenue de l\'article']) !!}
+                                        {!! Form::textarea ('contenus', null, ['class' => 'form-control', 'placeholder' => 'Contenus de l\'article']) !!}
                                         {!! $errors->first('contenus', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group {!! $errors->has('user_id') ? 'has-error' : '' !!}">
@@ -99,7 +99,7 @@
                                     </div>
 
                                     <div class="form-group {!! $errors->has('post_category') ? 'has-error' : '' !!}">
-                                        {!! Form::text('post_category', null, ['class' => 'form-control', 'placeholder' => 'category de l\'article']) !!}
+                                        {!! Form::text('post_category', null, ['class' => 'form-control', 'placeholder' => 'catégorie de l\'article']) !!}
                                         {!! $errors->first('post_category', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
 
