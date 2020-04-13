@@ -10,6 +10,7 @@
         <div>
             {{ $post->post_content }}
         </div>
+    </div>
 
         <div class="panel-heading">Laissez un commentaire</div>
 
@@ -26,7 +27,7 @@
                     {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
-                    {!! Form::textarea ('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre commentaire']) !!}
+                    {!! Form::text('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre commentaire']) !!}
                     {!! $errors->first('texte', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
@@ -39,5 +40,4 @@
           <div> {{ $comment->comment_content }}</div>
         @endforeach
 
-    </div>
 @endsection

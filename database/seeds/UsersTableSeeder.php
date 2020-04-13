@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,8 +16,24 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 10)->create()->each(function ($user) { //générer les posts
-            $user->posts()->save(factory(App\Post::class)->create());
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'role' => 'admin',
+            'password' => bcrypt('admin'),
+            'email_verified_at' => now(),
+        ]);
+    
+        User::create([
+            'name' => 'user',
+            'email' => 'user@user.com',
+            'role' => 'user',
+            'password' => bcrypt('user'),
+            'email_verified_at' => now(),
+        ]);
+
+        factory(App\User::class, 10)->create()->each(function ($user) {
+            $user->posts()->save(factory(App\Post::class)->make());
         });
 
         factory(App\Post::class, 10)->create()->each(function ($post) {//générer les comments

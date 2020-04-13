@@ -4,7 +4,7 @@
         <ul>
             @foreach ( $posts as $post )
 
-                <li><a href= "{{"article/".$post->post_name}}">{{ $post->post_title }}</a></li>
+                <li><a href= "{{"articles/".$post->id}}">{{ $post->post_title }}</a></li>
                 <p>{{ $post->post_content }}</p>
             @endforeach
         </ul>
