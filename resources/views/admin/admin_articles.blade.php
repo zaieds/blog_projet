@@ -21,7 +21,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
     <style>
         .container {
-            padding: 0.5%;
+            position: relative;
         }
     </style>
     <div class="container">
@@ -32,12 +32,13 @@
 
                 <tr>
                     <th>#</th>
-                    <th>titre de l'article</th>
+                    <th>Titre de l'article</th>
                     <th>Nom de l'auteur</th>
                     <th>Contenus de l'article</th>
                     <th>Catégorie de l'article</th>
-                    <th>id utilisateur</th>
+                    <th>Id Utilisateur</th>
                     <th>Article Publié</th>
+                    <th colspan ="2">Action</th>
                 </tr>
                @foreach($posts as $post)
                     <tr class = "text-center">
@@ -53,7 +54,7 @@
                             <form action="{{ route('destroy_article', $post->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> Supprimer
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('Etes-vous sur de supprimer cet article?')"> Supprimer
                                 </button>
                            </form>
                         </td>

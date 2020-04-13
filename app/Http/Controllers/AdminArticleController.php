@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 
 class AdminArticleController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *

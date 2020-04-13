@@ -71,7 +71,14 @@ Route::resource('/admin/articles', 'AdminArticleController', [
         ]
     ])->only([
     'index', 'create', 'store', 'update', 'destroy' , 'edit'
-]);
+])->middleware('auth');
+
+Route::get('/admin/contact', 'ContactController@index')->middleware('auth');
+Route::delete('/admin/contact/destroy/{contact}', 'ContactController@destroy')->name("destroy_contact")->middleware('auth');
 
 Route::post('/article/{post}/comments','CommentsController@store')->name("comments_store");
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -10,6 +10,15 @@ class ContactController extends Controller
     /*function index(){
         return view('contact');
     }*/
+    public function index()
+    {
+        $contacts = \App\Contact::all();
+        return view('admin/admin_contact',array(
+            'contacts' => $contacts
+        ));
+        
+    }
+
     public function create()
     {
         return view('contact');
@@ -32,5 +41,13 @@ class ContactController extends Controller
     
         return view('confirm', $sucess);
 
+    }
+
+    public function destroy($contact)
+    {
+        $contact = Contact::find($contact);
+        $contact->delete();
+
+        return redirect('/admin/contact')->with('success', 'Contact supprimé !');
     }
 }
