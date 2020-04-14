@@ -22,7 +22,7 @@
     npm install
     ```
 
-3. Configurer de fichier .env et la base de données
+3. Configurer du fichier .env et de la base de données
 
    Dans le répertoire du projet, créer le fichier .env en copiant du fichier .env.example avec la commande:
 
