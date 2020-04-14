@@ -112,7 +112,7 @@
 
     L'accès à la gestion des articles et les demandes de contact est fait en cliquant sur l'onglet [Gestion](http://localhost:8000/admin)  (L'accès à cet onglet exige une authentification, à voir dans la partie 7).
     
-    La [gestion des articles](http://localhost:8000/admin/articles) à l'aide d'un contrôleur de type CRUD(AdminArticlesController). Ce contrôleur permet l’affichage d’une liste complète des articles ainsi que l’ajout, l’édition et la suppression d’un article qui se représentent par des buttons correspondant.
+    La [gestion des articles](http://localhost:8000/admin/articles) est faite à l'aide d'un contrôleur de type CRUD(AdminArticlesController). Ce contrôleur permet l’affichage d’une liste complète des articles ainsi que l’ajout, l’édition et la suppression d’un article qui se représentent par des buttons correspondant.
 
     Les informations remplies lors de l'ajout ou l'édition sont passées par la validation avant d'être enregistrées dans la base de données (les champs ne doivent pas être vide, l'user_id doit etre un nombre, etc.).
 
