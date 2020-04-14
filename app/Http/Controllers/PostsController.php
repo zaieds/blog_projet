@@ -10,7 +10,7 @@ class PostsController extends Controller
 {
     function index(){
 
-        //Show all articles from the database and return to view
+        //récupérer tous les articles et les passer au view 'article.blade.php'
         $posts = \App\Post::all();
         return view('article',array(
             'posts' => $posts
@@ -18,8 +18,8 @@ class PostsController extends Controller
     }
 
     public function show($post_id) {
-        $post = \App\Post::where('id',$post_id)->first(); //get first post with id == $post_id
-        return view('post_single',array( //Pass the post to the view
+        $post = \App\Post::where('id',$post_id)->first(); //récupérer le premier post si l'id == $post_id
+        return view('post_single',array( //Passer le post au view 'post_single.blade.php
             'post' => $post
         ));
     }
