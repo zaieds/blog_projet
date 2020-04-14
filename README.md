@@ -22,7 +22,7 @@
     npm install
     ```
 
-3. Configuration de fichier .env et la base de données
+3. Configurer de fichier .env et la base de données
 
    Dans le répertoire du projet, créer le fichier .env en copiant du fichier .env.example avec la commande:
 
@@ -30,7 +30,7 @@
    cp .env.example .env
    ```
 
-   Dans le répertoire 'database' du projet, créer un fichier nommé 'database.sqlite'
+   Dans le répertoire "database" du projet, créer un fichier nommé "database.sqlite".
 
    Ouvrir le fichier .env, modifier la DB_CONNECTION et la DB_DATABASE comme suivant:
    ```txt
@@ -60,7 +60,7 @@
 
 1. Le layout global:
 
-    Le bar de navigation en header de la page est toujours disposible. Il contient les liens permettant d'accéder aux différentes parties du blog:
+    Le bar de navigation en header de la page est toujours disponible. Il contient les liens permettant d'accéder aux différentes parties du blog:
 
     * Home
     * Articles
@@ -71,7 +71,7 @@
 
     Les articles, utilisateurs, commentaires et contacts sont sauvegardés dans une base SQLite.
 
-    La base de données est préremplir avec des fausses données à l'aide des Seeders de Laravel.
+    La base de données est préremplie avec des fausses données à l'aide des Seeders de Laravel.
 
     La réinitialisation de la base de données et peut se faire avec la commande: 
 
@@ -81,8 +81,8 @@
 
     Les relations entre les tables de la base de données sont faites avec l'Eloquent de Laravel:
 
-    * Un user peut avoir plusieur Post
-    * Un post peut avoir plusieur Comment
+    * Un user peut avoir plusieurs Post
+    * Un post peut avoir plusieurs Comment
 
 3. L'affichage des articles
 
