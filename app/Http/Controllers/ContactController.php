@@ -19,11 +19,13 @@ class ContactController extends Controller
         
     }
 
+    //retourner le view du formulaire contact
     public function create()
     {
         return view('contact');
     }
 
+    // validation et enregistrer la demande de contact dans la base de données
     public function store(Request $request)
     {
         $sucess = $request->validate([

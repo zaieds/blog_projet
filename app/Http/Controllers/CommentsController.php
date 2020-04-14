@@ -8,8 +8,14 @@ use App\Comments;
 
 class CommentsController extends Controller
 {
-    
-    public function store(Post $post){
+    // validation et enregistrer le commentaire dans la base de données
+    public function store(Request $request, Post $post){ 
+        $sucess = $request->validate([
+            'nom' => 'required',
+            'email' => 'required|email',
+            'texte' => 'required'
+        ]);
+
         Comments::create([
             'comment_name'=>request('nom'),
             'post_id' => $post->id,

@@ -16,14 +16,14 @@ class AdminArticleController extends Controller
      */
     public function index()
     {
-        //Show all posts from the database and return to view
+        //Afficher tous les articles dans la base de données
         $posts = \App\Post::all();
         return view('admin.admin_articles',array(
             'posts' => $posts
         ));
     }
     /**
-     * Show the form for creating a new resource.
+     * Afficher le formulaire pour créer un nouvel article.
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +33,7 @@ class AdminArticleController extends Controller
         }
 
     /**
-     * Store a newly created resource in storage.
+     * Passer par la validation et enregistrer l'article dans la base de données.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -81,7 +81,7 @@ class AdminArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Afficher le formulaire pour éditer un article
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -93,7 +93,7 @@ class AdminArticleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mettre à jour les modifications.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $article id of the article
@@ -131,7 +131,7 @@ class AdminArticleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprimer un article de la base de données.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
