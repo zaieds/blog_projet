@@ -22,15 +22,15 @@
 
                <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                     {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}
-                    {!! $errors->first('nom', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('nom', '<div class="text-danger">:message</div>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
                     {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Votre email']) !!}
-                    {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('email', '<div class="text-danger">:message</div>') !!}
                 </div>
                 <div class="form-group {!! $errors->has('texte') ? 'has-error' : '' !!}">
                     {!! Form::text('texte', null, ['class' => 'form-control', 'placeholder' => 'Votre commentaire']) !!}
-                    {!! $errors->first('texte', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('texte', '<div class="text-danger">:message</div>') !!}
                 </div>
                 {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
                 {!! Form::close() !!}
