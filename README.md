@@ -1,102 +1,137 @@
-#Mini blog laravel
+# Projet blog laravel
 
 
 
-## guide d'installation Laravel
+## Installation
 
-### Download Composer
+1. Clôner le projet
 
-#####Windows Installer
+    * Ouvrir le Terminal(Unix) ou le Command Prompt (Windows).
 
-In a first we must install the software "Composer". This software allows you to manage the different dependencies of the Laravel framework.
+    * Vous déplacer sur le répertoire où vous voulez placer le projet.
 
-To do this, you must download the executable "Composer-Setup.exe" from the application on the following site: [Download Composer](https://getcomposer.org/download/).
+    ```bash
+    git clone https://github.com/zaieds/blog_projet.git
+    ```
 
-#####Command-line installation
+2. Installer le composer, laravel et les composants nécessaires
 
-```bash
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-```
+    Dans le répertoire du projet, taper les commandes:
+    ```bash
+    composer install
+    npm install
+    ```
 
-### Steps to download Laravel
+3. Configurer le fichier .env et la base de données
 
-Once "Composer" installed, you must now install the Laravel framework. To do this, open the command line and type the following command:
+   Dans le répertoire du projet, créer le fichier .env en copiant du fichier .env.example avec la commande:
 
-```bash
-composer global require laravel/installer
-```
+   ```bash
+   cp .env.example .env
+   ```
 
-Once installed, the laravel new command will create a fresh Laravel installation in the directory you specify. 
-For instance, laravel new blog will create a directory named blog containing a fresh Laravel installation with all of Laravel's dependencies already installed:
+   Dans le répertoire "database" du projet, créer un fichier nommé "database.sqlite".
 
-```bash
-laravel new blog_projet
-```
+   Ouvrir le fichier .env, modifier la DB_CONNECTION et la DB_DATABASE comme suivant:
+   ```txt
+   DB_CONNECTION=sqlite
+   DB_DATABASE=/chemin/vers/l-application/database/database.sqlite
+   ```
+## Lancement
 
-###### Local Development Server
+   1. Sur le répertoire du projet, lancer le Seeder de la base de données:
+    
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
 
-If you have PHP installed locally and you would like to use PHP's built-in development server to serve your application, you may use the serve Artisan command. 
-This command will start a development server at http://localhost:8000
+   2. Lancer le serveur
+    
+   ```bash
+   php artisan serve
+   ```
+    
+   3. Si l'installation s'est bien passée, la page est accessible à l'url suivante:
 
+   ```URL
+   http://localhost:8000 
+   ```
+## Les parties implémentées
 
-```bash
-php artisan serve
-```
+1. Le layout global:
 
-## Learning Laravel
+    Le bar de navigation en header de la page est toujours disponible. Il contient les liens permettant d'accéder aux différentes parties du blog:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    * Home
+    * Articles
+    * Contact
+    * Gestion
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. La base de données:
 
-## Laravel Sponsors
+    Les articles, utilisateurs, commentaires et contacts sont sauvegardés dans une base SQLite.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    La base de données est préremplie avec des fausses données à l'aide des Seeders de Laravel.
 
-- **[Home](http://127.0.0.1:8000)**
-- **[Articles](http://127.0.0.1:8000/article)**
-- **[Contacts](http://127.0.0.1:8000/contact)**
-- **[Administrateur](http://127.0.0.1:8000/admin)**
-- **[Utilisateurs](http://127.0.0.1:8000/user)**
+    La réinitialisation de la base de données et peut se faire avec la commande: 
 
-## Contributing
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Les relations entre les tables de la base de données sont faites avec l'Eloquent de Laravel:
 
-## Code of Conduct
+    * Un user peut avoir plusieurs Post
+    * Un post peut avoir plusieurs Comment
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. L'affichage des articles
 
-## Security Vulnerabilities
+    Sur la page d'accueil [Home](http://localhost:8000/home), les trois derniers articles sont affichés.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    De la même façon, sur la page [Articles](http://localhost:8000/articles), tous les articles sont affichés.
+        
+    Le titre de chaque article contient le lien vers l'affichage de son titre, son contenu et son auteur.
+    
+4. Le formulaire de contact
 
-## License
+    La page [Contact](http://localhost:8000/contact/create) contient un formulaire pour déposer une demande de contact.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    La validation des champs de texte et d'email sont également implémenter: le formulaire ne peut pas être déposer si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email.
 
+    Une fois le formulaire est envoyé, les informations sont enregistrées dans la table "contact" de la base de données.
 
-## Usage
+5. La gestion des commentaires:
 
-```laravel
-import foobar
+    La table des commentaires est créée avec la migration et elle est remplie avec le Seeder.
+    
+    Un formulaire et une liste de commentaires sont affichés en bas de chaque articles.
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
+    Une fois envoyé, les informations d'un commentaire  sont enregistrés et affichés en bas de l'article.
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+6. Le CRUD des articles et la gestion des demandes de contact:
 
-Please make sure to update tests as appropriate.
+    L'accès à la gestion des articles et les demandes de contact est fait en cliquant sur l'onglet [Gestion](http://localhost:8000/admin)  (L'accès à cet onglet exige une authentification, à voir dans la partie 7).
+    
+    La [gestion des articles](http://localhost:8000/admin/articles) est faite à l'aide d'un contrôleur de type CRUD(AdminArticlesController). Ce contrôleur permet l’affichage d’une liste complète des articles ainsi que l’ajout, l’édition et la suppression d’un article qui se représentent par des buttons correspondant.
 
+    Les informations remplies lors de l'ajout ou l'édition sont passées par la validation avant d'être enregistrées dans la base de données (les champs ne doivent pas être vide, l'user_id doit etre un nombre, etc.).
 
-## Authors
-siwar zaied
+    La suppression d'un article demande un validation par un box d'alert.
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+    La [gestion des articles](http://localhost:8000/admin/contact) permet l'accès à la liste des demandes de contact. Un button de supprimer est disponible pour supprimer un contact.
+
+7. Identification / Authentification qui protège l'accès à l’administration
+
+    La partie [Gestion](http://localhost:8000/admin) est protégée par une étape de l'identification.
+
+    Les comptes suivant sont disponible pour le test de l'authentification
+    
+    * Identifiant : admin@admin.com - Mot de passe: admin
+
+    * Identifiant : user@user.com - Mot de passe: user    
+
+## Auteur
+Siwar  ZAIED
+
+Thi Giang Thu TRAN
+

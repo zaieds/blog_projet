@@ -66,6 +66,7 @@
             </div>
             {!! Form::submit('Envoyer', ['class' => 'button primary pull-right']) !!}
             {!! Form::close() !!}
+
         </div>
 
         <div class="article__comments fill-width">

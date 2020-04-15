@@ -23,8 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = \App\Post::orderBy('id','desc')->take(3)->get();
-        return view('welcome',array(
+        $posts = \App\Post::orderBy('id','desc')->take(3)->get();//récupérer les 3 derniers articles
+        return view('welcome',array(//passer les 3 articles au view "welcome.blade.php"
             'posts' => $posts
         ));
         //return view('home');
