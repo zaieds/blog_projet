@@ -57,7 +57,9 @@
                     @endforeach
 
                 </table>
+
                 <!-- ********************** Ajouter un utilisateur *****************************-->
+                
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -146,6 +148,15 @@
 @push("scripts")
     <script>
 
+        /**
+         *
+         * ***************************Création de l'utilisateur ************************************
+         *
+         * @param key
+         * @param data
+         * @returns {string}
+         */
+
         function getText(key, data)
         {
             var text = "";
@@ -175,6 +186,14 @@
             });
         });
 
+        /*****
+         *
+         * *********************************Modification de l'utilisateur**************************
+         *
+         *
+         *
+         * @type {Element}
+         */
 
 
         var editSubmitUserJs = document.querySelector("#editSubmitUserJs");
