@@ -60,7 +60,7 @@
 
 1. Le layout global:
 
-    Le bar de navigation en header de la page est toujours disponible. Il contient les liens permettant d'accéder aux différentes parties du blog:
+    Le bar de navigation disponible en header de la page contient les liens permettant d'accéder aux différentes parties du blog:
 
     * Home
     * Articles
@@ -96,7 +96,7 @@
 
     La page [Contact](http://localhost:8000/contact/create) contient un formulaire pour déposer une demande de contact.
 
-    La validation des champs de texte et d'email sont également implémenter: le formulaire ne peut pas être déposer si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email.
+    La validation des champs de texte et d'email est également implémentée: le formulaire ne peut pas être déposé si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email.
 
     Une fois le formulaire est envoyé, les informations sont enregistrées dans la table "contact" de la base de données.
 
@@ -105,8 +105,10 @@
     La table des commentaires est créée avec la migration et elle est remplie avec le Seeder.
     
     Un formulaire et une liste de commentaires sont affichés en bas de chaque articles.
+    
+    La validation des champs de texte et d'email est implémentée: le formulaire ne peut pas être déposé si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email.
 
-    Une fois envoyé, les informations d'un commentaire  sont enregistrés et affichés en bas de l'article.
+    Une fois envoyées, les informations d'un commentaire sont enregistrées et affichées en bas de l'article.
 
 6. Le CRUD des articles et la gestion des demandes de contact:
 
@@ -118,7 +120,7 @@
 
     La suppression d'un article demande un validation par un box d'alert.
 
-    La [gestion des articles](http://localhost:8000/admin/contact) permet l'accès à la liste des demandes de contact. Un button de supprimer est disponible pour supprimer un contact.
+    La [gestion des articles](http://localhost:8000/admin/contact) permet l'accès à la liste des demandes de contact. Un button de supprimer est disponible pour supprimer un contact de la base de données.
 
 7. Identification / Authentification qui protège l'accès à l’administration
 
