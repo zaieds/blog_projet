@@ -114,7 +114,7 @@
 
     La page [Contact](http://localhost:8000/contact/create) contient un formulaire pour déposer une demande de contact.
 
-    La validation des champs de texte et d'email est également implémentée: le formulaire ne peut pas être déposé si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email.
+    La validation des champs de texte et d'email est également implémentée: le formulaire ne peut pas être déposé si les champs sont laissés vide ou le champs de l'email ne contient pas une adresse email valide.
 
     Une fois le formulaire est envoyé, les informations sont enregistrées dans la table "contact" de la base de données.
 
@@ -140,16 +140,16 @@
 
     Il y a deux groupes d'utilisateur: les admins et les utilisateurs.
     
-    * Un admin peut gérer tous les articles, les contacts et les utilisateurs.
-    * Un utilisateur peut voir la liste de ses articles, ajouter, modifier ou supprimer un de ses articles ainsi que gérer les commentaires de ses articles.
+    * Un admin peut avoir accès à la gestion de tous les articles, les contacts et les utilisateurs.
+    * Un utilisateur peut avoir accès à la liste de ses articles, ajouter, modifier ou supprimer un de ses articles ainsi que gérer les commentaires de ses articles.
 
-    Pour plus de détail, veuiller voir la partie 7 qui suit.
+    Pour plus de détail, veuillez voir la partie 7 qui suit.
 
 7. Le CRUD des articles, des utilisateurs et la gestion des demandes de contact:
 
     7.1. Les droits de gestion d'un admin:
     
-    Une fois se connectée, un utilisateur admin peut avoir accès à la gestion en cliquant sur l'onglet [Gestion](http://localhost:8000/admin)
+    Une fois se connectée, un utilisateur admin peut avoir accès à la gestion en cliquant sur l'onglet [Administration du site](http://localhost:8000/admin). Trois boutons sont disponibles pour 
     
     La [gestion des articles](http://localhost:8000/admin/articles) est faite à l'aide d'un contrôleur de type CRUD(AdminArticlesController). Ce contrôleur permet
     * l’affichage d’une liste complète des articles 
@@ -168,10 +168,10 @@
 
     7.2. Les droits de gestion d'un utilisateur:
 
-    Une fois se connecté, un utilisateur peut avoir accès à:
-    * la liste de ses articles (l'onglet Mes articles)
-    * ajouter, modifier ou supprimer un de ses articles (L'onglet Gérer mes données)
-    * gérer les commentaires de ses articles
+    Une fois se connecté, un utilisateur peut:
+    * voir la liste de ses articles (l'onglet Mes articles)
+    * ajouter, modifier ou supprimer un de ses articles (L'onglet Gérer mes données). Il faut toutefois noter qu'un article ne peut être ajouté si l'utilisateur remplir le bon user_id (s'il remplit le champs user_id avec une autre personne, les informations remplies ne seront pas enregistrées dans la base de données)
+    * supprimer les commentaires de ses articles. Toutefois, la fonctionnalité de "répondre" et "éditer" n'est pas encore implémentée.
 
 ## Auteur
 Siwar  ZAIED
