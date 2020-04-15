@@ -15,13 +15,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && mb_strtolower(Auth::user()->role) == "admin") {
+        //if (Auth::check() && mb_strtolower(Auth::user()->role) == "admin") {
             //Show all posts from the database and return to view
             $users = \App\User::all();
             return view('admin.admin_user', array(
                 'users' => $users
             ));
-        }
+       // }
         return back();
     }
 
@@ -45,15 +45,17 @@ class UserController extends Controller
     {
         $request->validate([
             'nomUser' => 'required',
-            'nomemail' => 'required',
+            'emailUser' => 'required',
+            'password' => 'required',
         ]);
 
         $user = new  User();
 
         $user->name = $request->input("nomUser");
         $user->email = $request->input("emailUser");
+        $user->password = bcrypt($request->input("password"));
         $user->save();
-        return redirect()->route('admin_user', ["id" => $user->id])
+        return redirect()->route('index_user')
             ->with('success', 'l\'article a été créer avec succées.');
     }
 
@@ -91,8 +93,12 @@ class UserController extends Controller
         $data = $request->all();
         $post = User::find(['id'=> $id])->first();
 
+        if(isset($data[name]))
         $post->name = $data['name'];
+        if(isset($data['email']))
         $post->email = $data['email'];
+        if(isset($data['password']))
+        $post->password = bcrypt($data['password']);
 
         $post->save();
         return response()->json([

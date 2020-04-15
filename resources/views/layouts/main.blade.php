@@ -64,14 +64,14 @@
                 @endguest
                 --}}
                 
-                <a href="{{route("admin")}}">Gestion</a>
+                <a href="{{route("admin")}}">Administrer le site</a>
             </li>
             @elseif(Auth::check())
             <li>
                 <a href="{{route("user_articles", ['user_id'=>Auth::user()->id])}}">Mes articles</a>
             </li>
             <li>
-                <a href="{{route("user_admin", ['user_id'=>Auth::user()->id])}}">Gérer mes données</a>
+                <a href="{{route("user_admin")}}">Gestion des données</a>
             </li>
             @endif
         </ul>

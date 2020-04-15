@@ -24,7 +24,7 @@
                     <th>Catégorie de l'article</th>
                     <th>Id Utilisateur</th>
                     <th>Article Publié</th>
-                    <th colspan ="2">Action</th>
+                    <th colspan ="3">Action</th>
                 </tr>
                @foreach($posts as  $key => $post)
                     <tr class = "text-center">
@@ -35,6 +35,7 @@
                         <td class="post_category">{{ $post->post_category }}</td>
                         <td class="post_userId">{{ $post->user_id }}</td>
                         <td class="post_status">{{ $post->post_status=="1"?"True":"False" }}</td>
+                        <td><a class = "btn btn-info" href="{{route("user_admin_comments", ['article_id'=>$post->id, 'user_id'=> Auth::user()->id ] )}}" data-postid="{{$post->id}}">Commentaires</a></td>
                         <td><a class = "btn btn-info editPostJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{$post->id}}">Editer</a></td>
                         <td>
                             <a href="#myModalDel{{$key}}" class="trigger-btn btn btn-danger" data-toggle="modal">Supprimer</a>

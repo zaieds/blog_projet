@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -12,10 +14,13 @@ class ContactController extends Controller
     }*/
     public function index()
     {
-        $contacts = \App\Contact::all();
-        return view('admin/admin_contact',array(
-            'contacts' => $contacts
-        ));
+        if ( Auth::check() && mb_strtolower(Auth::user()->role) == "admin" ) {
+            $contacts = \App\Contact::all();
+            return view('admin/admin_contact', array(
+                'contacts' => $contacts
+            ));
+        }
+        return back();
         
     }
 
