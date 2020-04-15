@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mini Blog - @yield('title')</title>
+    <title>MIASHS Blog @yield('title')</title>
     <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>-->
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Font Awesome -->
@@ -56,15 +56,9 @@
             <li><a href="{{route("contact")}}">Contact</a></li>
             @if( Auth::check() && mb_strtolower(Auth::user()->role) == "admin")
             <li>
-                {{-- 
-                @guest
-                    <a class="nav-link" href="{{ route('login') }}">Gestion</a> 
-                @else
-                    <a href="/{{ Auth::user()->role }}/articles">Gestion</a>
-                @endguest
-                --}}
+
                 
-                <a href="{{route("admin")}}">Administrer le site</a>
+                <a href="{{route("admin")}}">Administration du site</a>
             </li>
             @elseif(Auth::check())
             <li>

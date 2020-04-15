@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use app\User;
+use App\User;
+use Illuminate\Contracts\Auth\PasswordBrokerFactory;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,8 @@ class UserController extends Controller
     public function create()
     {
         //
+
+
     }
 
     /**
@@ -43,20 +46,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        //var_dump($request);
         $request->validate([
             'nomUser' => 'required',
-            'emailUser' => 'required',
+            'emailUser' => 'required|email',
             'password' => 'required',
+            'role' => 'required'
         ]);
 
         $user = new  User();
 
         $user->name = $request->input("nomUser");
         $user->email = $request->input("emailUser");
+        $user->role = $request['role']==true? "admin": "user";
         $user->password = bcrypt($request->input("password"));
+        $user->email_verified_at = now();
         $user->save();
         return redirect()->route('index_user')
             ->with('success', 'l\'article a été créer avec succées.');
+
     }
 
     /**
@@ -91,16 +99,18 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $post = User::find(['id'=> $id])->first();
+        $user = User::find(['id'=> $id])->first();
 
-        if(isset($data[name]))
-        $post->name = $data['name'];
+        if(isset($data['name']))
+        $user->name = $data['name'];
         if(isset($data['email']))
-        $post->email = $data['email'];
+        $user->email = $data['email'];
         if(isset($data['password']))
-        $post->password = bcrypt($data['password']);
+        $user->password = bcrypt($data['password']);
+        if(isset($data['role']))
+        $user->role = $data['role']==true? "admin": "user";
 
-        $post->save();
+        $user->save();
         return response()->json([
         ]);
     }
@@ -113,9 +123,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $post = User::findOrFail($id);
-        $post->delete();
-   return back();
+        $user = User::findOrFail($id);
+        $user->delete();
+        return back();
 
     }
 }

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable
 {
     protected $table ='users';
+    public $timestamps = false;
     use Notifiable;
 
     public static function create($data)

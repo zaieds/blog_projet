@@ -89,6 +89,7 @@ Route::delete('/admin/contact/destroy/{contact}', 'ContactController@destroy')->
 Route::resource('/admin/users', 'UserController',[
     'names' => [
     'index' => 'index_user',
+    'create' => 'create_user',
     'store' => 'store_user', // insert into db
     'update' => 'update_user',
     'edit' => 'edit_user',
