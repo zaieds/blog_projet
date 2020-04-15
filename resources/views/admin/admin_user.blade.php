@@ -25,10 +25,10 @@
                     </tr>
                     @foreach($users as  $key => $user)
                         <tr class = "text-center">
-                            <td class="user_id">{{ $user->id }}</td>
-                            <td class="user_name">{{ $user->name }}</td>
-                            <td class="user_name">{{ $user->role }}</td>
-                            <td class="user_email">{{ $user->email }}</td>
+                            <td class="id">{{ $user->id }}</td>
+                            <td class="nomUser">{{ $user->name }}</td>
+                            <td class="roleUser">{{ $user->role }}</td>
+                            <td class="emailUser">{{ $user->email }}</td>
                             <td><a class = "btn btn-info editUserJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{ $user->id }}">Editer</a></td>
                             <td>
                                 <a href="#myModalDel{{$key}}" class="trigger-btn btn btn-danger" data-toggle="modal">Supprimer</a>
@@ -132,18 +132,21 @@
         }
         var tds = null;
         var _token = document.querySelector(".userEdit input[name=_token]");
-        var user_id = null;
-        var user_name = null;
-        var user_email = null;
+        var id = null;
+        var nomUser = null;
+        var emailUser = null;
+        var roleUser = null;
         $editButtons = document.querySelectorAll(".editUserJs");
         $editButtons.forEach( editBtn => {
             editBtn.addEventListener("click", (e) =>{
                 tds = editBtn.parentNode.parentElement.querySelectorAll("td:not(:last-child)");
                 nomUser = document.querySelector(".userEdit input[name=nomUser]");
                 emailUser= document.querySelector(".userEdit input[name=emailUser]");
+                roleUser = document.querySelector(".userEdit input[name=roleUser]");
                 id = getText("id", tds);
-                nomUser.value = getText("name", tds);
-                emailUser.value = getText("email", tds);
+                nomUser.value = getText("nomUser", tds);
+                emailUser.value = getText("emailUser", tds);
+                rolelUser.value = getText("roleUser", tds);
             });
         });
         /*****
@@ -159,8 +162,9 @@
             e.preventDefault();
             var urlPut = "{{route('update_user', ['user'=>"--"])}}".replace("--", id);
             const formData = {
-                'name': nomUser.value,
-                'email': emailUser.value,
+                'nomUser': nomUser.value,
+                'emailUser': emailUser.value,
+                'roleUser' : roleUser.value
             }
             console
                 .log(formData)

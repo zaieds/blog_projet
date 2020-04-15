@@ -7,7 +7,7 @@
             <div class="modal-body">
                 <div class="panel-body">
 
-                <form>
+                <form class="userEdit">
                 {!! Form::token() !!}
                 <div class="form-group {!! $errors->has('nomUser') ? 'has-error' : '' !!}">
                     {!! Form::text('nomUser', $user->name , ['class' => 'form-control', 'placeholder' => 'nom de l\'utilisateur']) !!}
@@ -18,9 +18,9 @@
                     {!! $errors->first('emailUser', '<div class="text-danger">:message</div>') !!}
                 </div>
 
-                <div class="form-group {!! $errors->has('role') ? 'has-error' : '' !!}">
-                    {!! Form::text('role', $user->role , ['class' => 'form-control', 'placeholder' => '{{ $user->role }}']) !!}
-                    {!! $errors->first('role', '<div class="text-danger">:message</div>') !!}
+                <div class="form-group {!! $errors->has('roleUser') ? 'has-error' : '' !!}">
+                    {!! Form::text('roleUser', $user->role , ['class' => 'form-control', 'placeholder' => 'Role user']) !!}
+                    {!! $errors->first('roleUser', '<div class="text-danger">:message</div>') !!}
                 </div>
 
                 <div class="form-group">
