@@ -23,4 +23,22 @@ class PostsController extends Controller
             'post' => $post
         ));
     }
+    public function showUserArticle(Request $request, $user_id, $article_id)
+    {
+        $post = \App\Post::where(['user_id'=>$user_id, "id"=>$article_id ])->first(); //get first post with id == $post_id
+        return view('post_single',array( //Pass the post to the view
+        'post' => $post
+    ));
+    }
+    public function showUserArticles(Request $request, $user_id)
+    {
+        $posts = \App\Post::where('user_id',$user_id)
+            ->orderBy('name', 'desc')
+            ->get();
+
+        return view('article',array(
+            'user_id' => $user_id,
+            'posts' => $posts
+        ));
+    }
 }

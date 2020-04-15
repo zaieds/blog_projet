@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\Auth;
 class AdminArticleController extends Controller
 {
     
@@ -16,12 +16,18 @@ class AdminArticleController extends Controller
      */
     public function index()
     {
-        //Afficher tous les articles dans la base de données
-        $posts = \App\Post::all();
-        return view('admin.admin_articles',array(
-            'posts' => $posts
-        ));
+
+        if ( Auth::check() && mb_strtolower(Auth::user()->role) == "admin" ) {
+            //Show all posts from the database and return to view
+            $posts = \App\Post::all();
+            return view('admin.admin_articles', array(
+                'posts' => $posts
+            ));
+        }
+        return back();
+
     }
+
     /**
      * Afficher le formulaire pour créer un nouvel article.
      *

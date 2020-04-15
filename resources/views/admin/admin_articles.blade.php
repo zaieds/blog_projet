@@ -9,6 +9,9 @@
     </style>
     <div class="container">
     <div class="row">
+
+
+
         <a href="" class = "btn btn-info" data-toggle="modal" data-target="#exampleModal">Ajouter un article</a>
         <div class="col-md-12">
             <table class="table table-bordered">
@@ -23,7 +26,7 @@
                     <th>Article Publié</th>
                     <th colspan ="2">Action</th>
                 </tr>
-               @foreach($posts as $post)
+               @foreach($posts as  $key => $post)
                     <tr class = "text-center">
                         <td class="post_id">{{ $post->id }}</td>
                         <td class="post_title">{{ $post->post_title }}</td>
@@ -34,12 +37,29 @@
                         <td class="post_status">{{ $post->post_status=="1"?"True":"False" }}</td>
                         <td><a class = "btn btn-info editPostJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{$post->id}}">Editer</a></td>
                         <td>
-                            <form action="{{ route('destroy_article', $post->id)}}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit" onclick="return confirm('Etes-vous sur de supprimer cet article?')"> Supprimer
-                                </button>
-                           </form>
+                            <a href="#myModalDel{{$key}}" class="trigger-btn btn btn-danger" data-toggle="modal">Supprimer</a>
+                            <div id="myModalDel{{$key}}" class="modal fade" style="display: none;">
+                                <div class="modal-dialog modal-confirm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">suppression de l'article</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Voulez-vous vraiment supprimer cet article ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-info" data-dismiss="modal">Annuler</button>
+                                            <form action="{{ route('destroy_article', $post->id) }}" method="post">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <button type="submit" class="btn btn-danger">supprimer</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -51,9 +71,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Ajouter un article</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+
                        </div>
                         <div class="modal-body">
                             <div class="panel-body">
@@ -69,7 +87,7 @@
                                         {!! $errors->first('nomAut', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group {!! $errors->has('contenus') ? 'has-error' : '' !!}">
-                                        {!! Form::textarea ('contenus', null, ['class' => 'form-control', 'placeholder' => 'Contenue de l\'article']) !!}
+                                        {!! Form::textarea ('contenus', null, ['class' => 'form-control', 'placeholder' => 'Contenus de l\'article']) !!}
                                         {!! $errors->first('contenus', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
                                     <div class="form-group {!! $errors->has('user_id') ? 'has-error' : '' !!}">
@@ -78,7 +96,7 @@
                                     </div>
 
                                     <div class="form-group {!! $errors->has('post_category') ? 'has-error' : '' !!}">
-                                        {!! Form::text('post_category', null, ['class' => 'form-control', 'placeholder' => 'category de l\'article']) !!}
+                                        {!! Form::text('post_category', null, ['class' => 'form-control', 'placeholder' => 'catégorie de l\'article']) !!}
                                         {!! $errors->first('post_category', '<div class="invalid-feedback">:message</div>') !!}
                                     </div>
 
@@ -163,7 +181,7 @@
             }
             console
                 .log(formData)
-            return fetch(urlPut, {
+            fetch(urlPut, {
                 method: 'PUT',
                 headers: {
                     'X-CSRF-TOKEN': _token.value,
@@ -171,7 +189,7 @@
                 },
                 body: JSON.stringify(formData)
             }).then(response => {
-                window.location = "{{route('index_article')}}";
+                window.location = window.location.href;
                 console.log(response.json());
 
             }, (error)=>
@@ -180,6 +198,5 @@
             }).then(()=>console.log("************ DONE *************"));
 
         })
-
     </script>
 @endpush

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('titre')</title>
+    <title>Mini Blog - @yield('title')</title>
     <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>-->
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
     <!-- Font Awesome -->
@@ -26,9 +26,20 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.9/js/mdb.min.js"></script>
     <style>
         .container {
-            margin: auto;
-            width: 50%;
-        }     
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 1em;
+        }
+        h2.title{
+            font-weight: 600;
+            font-size: 25px;
+            margin-bottom: 1em;
+        }
+        h3{
+            font-weight: 500;
+            font-size: 20px;
+            margin-bottom: 1em;
+        }
     </style>
     
     @yield('custom-styles')
@@ -43,6 +54,7 @@
             <li><a href="{{route("home")}}">Home</a></li>
             <li><a href="{{route("articles")}}">Articles</a></li>
             <li><a href="{{route("contact")}}">Contact</a></li>
+            @if( Auth::check() && mb_strtolower(Auth::user()->role) == "admin")
             <li>
                 {{-- 
                 @guest
@@ -54,6 +66,14 @@
                 
                 <a href="{{route("admin")}}">Gestion</a>
             </li>
+            @elseif(Auth::check())
+            <li>
+                <a href="{{route("user_articles", ['user_id'=>Auth::user()->id])}}">Mes articles</a>
+            </li>
+            <li>
+                <a href="{{route("user_admin", ['user_id'=>Auth::user()->id])}}">Gérer mes données</a>
+            </li>
+            @endif
         </ul>
     </div>
 

@@ -15,7 +15,6 @@ class Post extends Model
 
     public static function create($data)
     {
-        dd($data);
 
         return parent::create($data);
     }
