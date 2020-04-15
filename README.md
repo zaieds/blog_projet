@@ -47,26 +47,28 @@
 
    1. Sur le répertoire du projet, lancer la migration et le Seeder de la base de données:
 
-    ```bash
-   php artisan migrate
-   php artisan db:seed
-   ```
-    ou 
+        ```bash
+        php artisan migrate
+        php artisan db:seed
+        ```
+    
+        ou 
 
-     ```bash
-   php artisan migrate:fresh --seed
-   ```
+        ```bash
+        php artisan migrate:fresh --seed
+        ```
+
    2. Lancer le serveur
     
-   ```bash
-   php artisan serve
-   ```
+        ```bash
+        php artisan serve
+        ```
     
    3. Si l'installation s'est bien passée, la page est accessible à l'url suivante:
 
-   ```URL
-   http://localhost:8000 
-   ```
+        ```URL
+        http://localhost:8000 
+        ```
 ## Les parties implémentées
 
 1. Le layout global:
@@ -145,7 +147,9 @@
 
 7. Le CRUD des articles, des utilisateurs et la gestion des demandes de contact:
 
-    L'accès à la gestion exige une authentification (à voir dans la partie 7).est fait en cliquant sur l'onglet [Gestion](http://localhost:8000/admin)  (L'accès à cet onglet 
+    7.1. Les droits de gestion d'un admin:
+    
+    Une fois se connectée, un utilisateur admin peut avoir accès à la gestion en cliquant sur l'onglet [Gestion](http://localhost:8000/admin)
     
     La [gestion des articles](http://localhost:8000/admin/articles) est faite à l'aide d'un contrôleur de type CRUD(AdminArticlesController). Ce contrôleur permet
     * l’affichage d’une liste complète des articles 
@@ -158,10 +162,16 @@
     La [gestion des utilisateurs](http://localhost:8000/admin/articles) est faite à l'aide d'un contrôleur de type CRUD(UserController). Ce contrôleur permet 
     * l’affichage d’une liste complète des utilisateurs 
     * l’ajout et la suppression d’un utilisateur qui se représentent par des buttons correspondant.
-    * Pourtant, malgré des efforts de notre group, l'édition d'un utilisateur n'est pas encore être implémentée.
+    * pourtant, malgré des efforts de notre group, l'édition d'un utilisateur n'est pas encore être implémentée.
 
     La [gestion des contact](http://localhost:8000/admin/contact) permet l'accès à la liste des demandes de contact. Un button de supprimer est disponible pour supprimer un contact de la base de données.
 
+    7.2. Les droits de gestion d'un utilisateur:
+
+    Une fois se connecté, un utilisateur peut avoir accès à:
+    * la liste de ses articles (l'onglet Mes articles)
+    * ajouter, modifier ou supprimer un de ses articles (L'onglet Gérer mes données)
+    * gérer les commentaires de ses articles
 
 ## Auteur
 Siwar  ZAIED
