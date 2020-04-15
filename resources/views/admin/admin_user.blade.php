@@ -19,15 +19,17 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>Nom</th>
+                        <th>Rôle</th>
                         <th>E-mail</th>
                         <th colspan ="2">Action</th>
                     </tr>
                     @foreach($users as  $key => $user)
                         <tr class = "text-center">
                             <td class="user_id">{{ $user->id }}</td>
-                            <td class="user_name">{{ $user->name}}</td>
-                            <td class="user_email">{{ $user->email}}</td>
-                            <td><a class = "btn btn-info editUserJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{$user->id}}">Editer</a></td>
+                            <td class="user_name">{{ $user->name }}</td>
+                            <td class="user_name">{{ $user->role }}</td>
+                            <td class="user_email">{{ $user->email }}</td>
+                            <td><a class = "btn btn-info editUserJs" data-toggle="modal" data-target="#modelEdit" data-postid="{{ $user->id }}">Editer</a></td>
                             <td>
                                 <a href="#myModalDel{{$key}}" class="trigger-btn btn btn-danger" data-toggle="modal">Supprimer</a>
                                 <div id="myModalDel{{$key}}" class="modal fade" style="display: none;">
@@ -75,11 +77,22 @@
                                         {!! Form::token() !!}
                                         <div class="form-group {!! $errors->has('nomUser') ? 'has-error' : '' !!}">
                                             {!! Form::text('nomUser', null , ['class' => 'form-control', 'placeholder' => 'nom de l\'utilisateur']) !!}
-                                            {!! $errors->first('nomUser', '<div class="invalid-feedback">:message</div>') !!}
+                                            {!! $errors->first('nomUser', '<div class="text-danger">:message</div>') !!}
                                         </div>
                                         <div class="form-group {!! $errors->has('emailUser') ? 'has-error' : '' !!}">
                                             {!! Form::email('emailUser', null, ['class' => 'form-control', 'placeholder' => 'E-mail']) !!}
-                                            {!! $errors->first('emailUser', '<div class="invalid-feedback">:message</div>') !!}
+                                            {!! $errors->first('emailUser', '<div class="text-danger">:message</div>') !!}
+                                        </div>
+                                        
+                                        <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
+                                            {!! Form::text('password', null , ['class' => 'form-control', 'placeholder' => 'mot de passe']) !!}
+                                            {!! $errors->first('password', '<div class="text-danger">:message</div>') !!}
+                                        </div>
+                                        
+                                        <div class="form-group {!! $errors->has('role') ? 'has-error' : '' !!}">
+                                        {!! Form::checkbox('role', null, ['class' => 'form-control', 'placeholder' => 'Rôle admin']) !!}
+                                        {!! Form::label('role', 'Rôle admin') !!}
+                                        {!! $errors->first('role', '<div>:message</div>') !!}
                                         </div>
 
                                         <div class="form-group">
@@ -89,74 +102,26 @@
                                 </div>
 
                             </div>
-
-
-
-
-
                         </div>
                     </div>
                 </div>
+                @include("admin.admin_user_edit")
             </div>
         </div>
     </div>
-
-
-
-    {{-- -------------------------------Modifier l'utilisateur---------------------------- --}}
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un utilisateur</h5>
-
-                </div>
-
-    <div class="modal-body">
-        <div class="panel-body">
-
-            <form action={{"route('update_user', ['user' => $user->id])"}} method="post">
-                {!! Form::token() !!}
-                <div class="form-group {!! $errors->has('nomUser') ? 'has-error' : '' !!}">
-                    {!! Form::text('nomUser', $user->name , ['class' => 'form-control', 'placeholder' => 'nom de l\'utilisateur']) !!}
-                    {!! $errors->first('nomUser', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group {!! $errors->has('emailUser') ? 'has-error' : '' !!}">
-                    {!! Form::email('emailUser', $user->email, ['class' => 'form-control', 'placeholder' => 'E-mail']) !!}
-                    {!! $errors->first('emailUser', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" id="editSubmitUserJs" class="btn btn-primary" value="Enregistrer">
-                </div>
-            </form>
-        </div>
-
-    </div>
-
-            </div>
-        </div>
-    </div>
-
 
 @stop
 
-
-
 @push("scripts")
     <script>
-
         /**
          *
-         * ***************************Création de l'utilisateur ************************************
+         * ***************************Modification de l'utilisateur ************************************
          *
          * @param key
          * @param data
          * @returns {string}
          */
-
         function getText(key, data)
         {
             var text = "";
@@ -170,22 +135,17 @@
         var user_id = null;
         var user_name = null;
         var user_email = null;
-
-
         $editButtons = document.querySelectorAll(".editUserJs");
         $editButtons.forEach( editBtn => {
             editBtn.addEventListener("click", (e) =>{
                 tds = editBtn.parentNode.parentElement.querySelectorAll("td:not(:last-child)");
                 nomUser = document.querySelector(".userEdit input[name=nomUser]");
                 emailUser= document.querySelector(".userEdit input[name=emailUser]");
-
                 id = getText("id", tds);
                 nomUser.value = getText("name", tds);
                 emailUser.value = getText("email", tds);
-
             });
         });
-
         /*****
          *
          * *********************************Modification de l'utilisateur**************************
@@ -194,8 +154,6 @@
          *
          * @type {Element}
          */
-
-
         var editSubmitUserJs = document.querySelector("#editSubmitUserJs");
         editSubmitUserJs.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -216,14 +174,12 @@
             }).then(response => {
                 window.location = window.location.href;
                 console.log(response.json());
-
             }, (error)=>
             {
                 console.log(error)
             }).then(()=>console.log("************ DONE *************"));
-
         })
-
-
     </script>
 @endpush
+
+
