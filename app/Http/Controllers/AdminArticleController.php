@@ -46,6 +46,7 @@ class AdminArticleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'nomArt' => 'required',
             'nomAut' => 'required',
@@ -72,8 +73,6 @@ class AdminArticleController extends Controller
         $post->post_type = $request->input("post_category");
         $post->save();
         return back();
-        //return redirect()->route('article_show', ["post_id" => $post->id])
-          //  ->with('success','l\'article a été créer avec succées.');
     }
 
     /**
