@@ -47,7 +47,11 @@ Route::get('articles', 'PostsController@index')->name("articles");
  */
 Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 
-
+/**
+ * Show user's articles  /users/2/articles/21
+ */
+Route::get('/users/{user_id}/articles', "PostsController@showUserArticles")->name("user_articles");
+Route::get('/users/{user_id}/articles/{article_is}', "PostsController@showUserArticle")->name("user_article");
 /*
 
 ;
@@ -56,11 +60,12 @@ Route::get('/articles/{post_id}', 'PostsController@show')->name("article_show");
 ]);*/
 //Route::get('admin', 'AdminController');
 Route::get('/admin', 'AdminController@index')->name("admin");
-
+Route::get('/users/{user_id}/admin', 'AdminController@index')->name("user_admin");
+Route::get('/users/{user_id}/admin/articles', 'UserAdminController@indexArticles')->name("user_admin_articles");
+Route::get('/users/{user_id}/admin/comments', 'UserAdminController@indexComments')->name("user_admin_comments");
 /*Route::group(['middleware' => 'auth'], function () {
     Route::get('upload', ['as' => 'upload', 'uses' => 'MediaController@index']);
 });*/
-
 Route::resource('/admin/articles', 'AdminArticleController', [
         'names' => [
             'index' => 'index_article',
@@ -73,8 +78,23 @@ Route::resource('/admin/articles', 'AdminArticleController', [
     'index', 'create', 'store', 'update', 'destroy' , 'edit'
 ])->middleware('auth');
 
+
+
 Route::get('/admin/contact', 'ContactController@index')->middleware('auth');
 Route::delete('/admin/contact/destroy/{contact}', 'ContactController@destroy')->name("destroy_contact")->middleware('auth');
+
+Route::resource('/admin/users', 'UserController',[
+    'names' => [
+    'index' => 'index_user',
+    'store' => 'store_user', // insert into db
+    'update' => 'update_user',
+    'edit' => 'edit_user',
+    'destroy' => 'destroy_User',
+]
+    ])->only([
+    'index', 'create', 'store', 'update', 'destroy' , 'edit'
+])->middleware('auth');
+
 
 Route::post('/article/{post}/comments','CommentsController@store')->name("comments_store");
 
