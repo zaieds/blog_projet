@@ -56,22 +56,16 @@
             <li><a href="{{route("contact")}}">Contact</a></li>
             @if( Auth::check() && mb_strtolower(Auth::user()->role) == "admin")
             <li>
-                {{-- 
-                @guest
-                    <a class="nav-link" href="{{ route('login') }}">Gestion</a> 
-                @else
-                    <a href="/{{ Auth::user()->role }}/articles">Gestion</a>
-                @endguest
-                --}}
+
                 
-                <a href="{{route("admin")}}">Gestion</a>
+                <a href="{{route("admin")}}">Administration du site</a>
             </li>
             @elseif(Auth::check())
             <li>
                 <a href="{{route("user_articles", ['user_id'=>Auth::user()->id])}}">Mes articles</a>
             </li>
             <li>
-                <a href="{{route("user_admin", ['user_id'=>Auth::user()->id])}}">Gérer mes données</a>
+                <a href="{{route("user_admin")}}">Gestion des données</a>
             </li>
             @endif
         </ul>

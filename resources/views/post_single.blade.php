@@ -50,7 +50,7 @@
 
         <div class="panel-body">
             <div class="panel-heading"><b>Laissez un commentaire</b></div>
-            {!! Form::open(['url' => "article/$post->id/comments"]) !!}
+            {!! Form::open(['url' => route('comments_store', $post->id)]) !!}
 
             <div class="form-group {!! $errors->has('nom') ? 'has-error' : '' !!}">
                 {!! Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Votre nom']) !!}

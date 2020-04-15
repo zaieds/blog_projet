@@ -16,13 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::check() && mb_strtolower(Auth::user()->role) == "admin") {
+        //if (Auth::check() && mb_strtolower(Auth::user()->role) == "admin") {
             //Show all posts from the database and return to view
             $users = \App\User::all();
             return view('admin.admin_user', array(
                 'users' => $users
             ));
-        }
+       // }
         return back();
     }
 
@@ -50,20 +50,21 @@ class UserController extends Controller
         $request->validate([
             'nomUser' => 'required',
             'emailUser' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required'
         ]);
-        
-        $user = new User();
-        $user->name = $request->input('nomUser');
-        $user->email = $request->input('emailUser');
+
+        $user = new  User();
+
+        $user->name = $request->input("nomUser");
+        $user->email = $request->input("emailUser");
         $user->role = $request['role']==true? "admin": "user";
-        $user->password = bcrypt($request->input('password'));
+        $user->password = bcrypt($request->input("password"));
         $user->email_verified_at = now();
         $user->save();
-        
-        return back();
-        /*return redirect()->route('admin_user', ["id" => $user->id])
-            ->with('success', 'l\'article a été créer avec succées.');*/
+        return redirect()->route('index_user')
+            ->with('success', 'l\'article a été créer avec succées.');
+
     }
 
     /**
@@ -100,8 +101,14 @@ class UserController extends Controller
         $data = $request->all();
         $user = User::find(['id'=> $id])->first();
 
-        $user->name = $data['nomUser'];
-        $user->email = $data['emailUser'];
+        if(isset($data['name']))
+        $user->name = $data['name'];
+        if(isset($data['email']))
+        $user->email = $data['email'];
+        if(isset($data['password']))
+        $user->password = bcrypt($data['password']);
+        if(isset($data['role']))
+        $user->role = $data['role']==true? "admin": "user";
 
         $user->save();
         return response()->json([
