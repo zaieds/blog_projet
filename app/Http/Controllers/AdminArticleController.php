@@ -71,8 +71,9 @@ class AdminArticleController extends Controller
         $post->post_category = $request->input("post_category");
         $post->post_type = $request->input("post_category");
         $post->save();
-        return redirect()->route('article_show', ["post_id" => $post->id])
-            ->with('success','l\'article a été créer avec succées.');
+        return back();
+        //return redirect()->route('article_show', ["post_id" => $post->id])
+          //  ->with('success','l\'article a été créer avec succées.');
     }
 
     /**
